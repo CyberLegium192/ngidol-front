@@ -1,12 +1,7 @@
-import React from 'react'
-
-function addSchedule({open, setOpen}) {
-    const handleClick = () => {
-        setOpen(true)
-        console.log("schedule click")
-      }
+import {Link} from 'react-router-dom'
+function addSchedule() {
   return (
-    <button className="btn btn-sm btn-accent px-5 ml-5" onClick={() => handleClick()}>add</button>
+    <Link to='/schedule/post/schedule' className="btn btn-sm btn-accent px-5 ml-5">add</Link>
   )
 }
 

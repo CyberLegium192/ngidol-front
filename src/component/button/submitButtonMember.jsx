@@ -1,4 +1,3 @@
-import React from 'react'
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 function submitButtonMember({handleSubmit}) {

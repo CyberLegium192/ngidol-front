@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import axios, { Axios } from 'axios'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
+import {Link} from 'react-router-dom'
 import { AiOutlineClose } from 'react-icons/ai'
 import TextField from '@mui/material/TextField';
 import Textarea from '@mui/joy/Textarea';
-import DateInput from '../input (2)/date'
 import GenSelect from '../input (2)/gen'
 import Zodiac from '../input (2)/zodiac'
 import Blood from '../input (2)/blood'
@@ -11,8 +12,8 @@ import Height from '../input (2)/height'
 import Status from '../input (2)/status'
 import FileUpload from '../input (2)/fileUpload'
 import ButtonSubmit from '../button/submitButtonMember'
-function editMemberForm({ openEdit, setOpenEdit, datas }) {
-  const [readData, setReadData] = useState([])
+function editMemberForm() {
+  const {id} = useParams()
   const [values, setValues] = useState({
     firstname: '',
     lastname: '',
@@ -34,9 +35,8 @@ function editMemberForm({ openEdit, setOpenEdit, datas }) {
   })
   
   useEffect(() => {
-    console.log(datas.id)
     
-    fetch(`http://localhost:3000/member/${datas.id}`)
+    fetch(`http://localhost:3000/member/${id}`)
     .then(resp => resp.json())
     .then(data => {
     setValues({...values, 
@@ -54,30 +54,28 @@ function editMemberForm({ openEdit, setOpenEdit, datas }) {
     jiko: data.jiko,
     instagram: data.instagram,
     tiktok: data.tiktok,
-    tweet: data.tweet,    showroom: data.showroom,
+    tweet: data.tweet,    
+    showroom: data.showroom,
     fanbase: data.fanbase,
     })})
     
-  }, [datas])
+  }, [id])
   
   const handleSubmit =  () => {
       try {
-      axios.patch(`http://localhost:3001/update/member/${datas.id}`, values)
-      .then(data => console.log(data))
-      console.log(res.data)
+      axios.patch(`http://localhost:3000/member/${id}`, values)
+      location.reload()
       } catch (e) {
         console.log(e)
       }
-      
-      
   }
       
 
   return (
-    <div className={openEdit ? "translate-x-0 w-full left-0 z-40 h-screen duration-500 absolute top-0 bg-white p-4" : "translate-x-full w-full left-0 z-40 h-screen duration-500 absolute top-0 bg-white p-4"}>
+    <div className=" w-full z-40 h-screen duration-500  bg-white p-4">
       <div className='flex justify-between'>
         <h4 className=' text-2xl uppercase text-red-600 font-bold'>UPDATE Form Member</h4>
-        <button className='hover:rotate-90 duration-300' onClick={() => setOpenEdit(!openEdit)}><AiOutlineClose size={30} /></button>
+        <Link className='hover:rotate-90 duration-300' to='/member'><AiOutlineClose size={30} /></Link>
       </div>
       
       <form className='md:pb-0 md:h-auto h-screen

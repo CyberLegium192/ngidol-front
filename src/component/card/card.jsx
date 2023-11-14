@@ -3,7 +3,7 @@ import ReadButton from '../button/readButton'
 import EditButton from '../button/editButton'
 import TrashButton from '../button/trashButton'
 
-function card({item, handleRead, handleUpdate, handleDelete}) {
+function card({item, handleRead, handleDelete}) {
 
     return (
         <div className={`w-full border border-red-500 rounded-lg overflow-hidden p-5 pb-3 relative before:bg-red-500 
@@ -25,7 +25,7 @@ function card({item, handleRead, handleUpdate, handleDelete}) {
             {/* BUTTON ACTION */}
             <div className="flex justify-between mt-5">
                 <ReadButton  handleRead={handleRead} item={item}/>
-                <EditButton handleUpdate={handleUpdate} item={item}/>
+                <EditButton item={item}/>
                 <TrashButton handleDelete={handleDelete} item={item}/>
             </div>
         </div>

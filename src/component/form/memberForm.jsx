@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios, { Axios } from 'axios'
+import {Link} from 'react-router-dom'
 import { AiOutlineClose } from 'react-icons/ai'
 import TextField from '@mui/material/TextField';
 import Textarea from '@mui/joy/Textarea';
-import DateInput from '../input/date'
 import GenSelect from '../input/gen'
 import Zodiac from '../input/zodiac'
 import Blood from '../input/blood'
@@ -50,19 +50,20 @@ function memberForm({ open, setOpen, readData }) {
         formData.append("instagram", instagram)
         formData.append("tiktok", tiktok)
         formData.append("tweet", twitter)
-        formData.append("showroom", showroom)
+        formData.append("showroom", showroom) 
         formData.append("fanbase", fanbase)
-        const res = axios.post('https://b33d-114-5-110-174.ngrok-free.app/upload/member', formData)
-        setTimeout(function() {location.reload()}, 700);
+        const res = axios.post('http://localhost:3001/upload/member', formData)
+        console.log(res)
+        setTimeout(function() {location.href='/member'}, 700);
       }
       
   }
 
   return (
-    <div className={open ? "translate-x-0 w-full left-0 z-40 h-screen duration-500 absolute top-0 bg-white p-4" : "translate-x-full w-full left-0 z-40 h-screen duration-500 absolute top-0 bg-white p-4"}>
+    <div className="w-full left-0 z-40 h-screen duration-500 top-0 bg-white p-4">
       <div className='flex justify-between'>
         <h4 className=' text-2xl uppercase text-red-600 font-bold'>Form Member</h4>
-        <button className='hover:rotate-90 duration-300' onClick={() => setOpen(!open)}><AiOutlineClose size={30} /></button>
+        <Link className='hover:rotate-90 duration-300' to='/member'><AiOutlineClose size={30} /></Link>
       </div>
       
       <form className='md:pb-0 md:h-auto h-screen
