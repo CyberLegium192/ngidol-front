@@ -26,7 +26,7 @@ function memberPage({active}) {
   const handleDelete = (item) => {
     var val = confirm(`ingin menghapus data ${item.callname}??`)
     if(val == true){
-      axios.delete(`http://localhost:3000/member/${item.id}`)
+      axios.delete(`http://localhost:3004/member/${item.id}`)
       setTimeout(function() {
         location.reload()
       }, 700);
@@ -36,7 +36,7 @@ function memberPage({active}) {
   }
 
   const getData =() => {
-    fetch('http://localhost:3000/member').then(resp => resp.json()).then(data => setApi(data))
+    fetch('http://localhost:3004/member').then(resp => resp.json()).then(data => setApi(data))
   }
   useEffect(() => {
     getData()

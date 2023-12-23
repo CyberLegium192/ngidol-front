@@ -13,8 +13,8 @@ function schedulePage() {
   
   
   useEffect(() => {
-      fetch('http://localhost:3000/schedule').then(resp => resp.json())
-      .then(datas => setData(datas))
+      fetch('http://localhost:3000/api/v1/schedule/').then(resp => resp.json())
+      .then(datas => setData(datas.schedule))
   }, [])
 
 
@@ -54,8 +54,8 @@ function schedulePage() {
           min-[360px]:grid-cols-2
           sm:grid-cols-3
           ">
-          {
-            data.map((item) => <ScheduleCard item={item} handleDelete={handleDelete} key={item.id}/>)
+          { 
+            data?.map((item) => <ScheduleCard item={item} handleDelete={handleDelete} key={item.id}/>)
           }
           </div>
         </div>
