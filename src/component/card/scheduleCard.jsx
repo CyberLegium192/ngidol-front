@@ -25,12 +25,12 @@ function scheduleCard({item, handleDelete}) {
         before:w-full before:absolute before:top-0 before:h-20 before:rounded-b-xl before:left-0 duration-500 cursor-default hover:-translate-y-3`} key={item.id}>
         
         <div className='w-full h-28 z-20 object-cover relative'>
-            <img src={`http://localhost:3001/schedule/images/${item.setlist}.jpg`} className='w-full h-full object-contain'></img>
+            <img src={`http://localhost:3000/schedule/images/${item.setlist}.jpg`} className='w-full h-full object-contain'></img>
         </div>
         <div className='p-2 pb-3'>
             {
-                item.setlist == "event" ? <h3 className='font-poppins text-sm text-red-500'>{item.acara}</h3> :
-                <h3 className='font-poppins text-sm text-red-500'>{item.setlist}</h3>
+                item.setlist == "event" ? <h3 className='font-poppins text-sm text-red-500'>{item.title}</h3> :
+                <h3 className='font-poppins text-sm text-red-500'>{item.title}</h3>
             }
 
 

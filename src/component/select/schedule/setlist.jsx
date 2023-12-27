@@ -20,8 +20,8 @@ function setlist({setValues, values}) {
         <MenuItem value='event'><p className="text-base font-poppins">event</p></MenuItem> 
         <MenuItem value='jkt48'><p className="text-base font-poppins">jkt48</p></MenuItem> 
         <MenuItem value='trainee'><p className="text-base font-poppins">trainee</p></MenuItem> 
-        <MenuItem value='Cara Meminum Ramune'><p className="text-base font-poppins">Cara Meminum Ramune</p></MenuItem> 
-        <MenuItem value='aturan anti cinta'><p className="text-base font-poppins">aturan anti cinta</p></MenuItem> 
+        <MenuItem value='cmr'><p className="text-base font-poppins">Cara Meminum Ramune</p></MenuItem> 
+        <MenuItem value='rkj'><p className="text-base font-poppins">aturan anti cinta</p></MenuItem> 
         <MenuItem value='banzai jkt48'><p className="text-base font-poppins">banzai jkt48</p></MenuItem> 
         <MenuItem value='pajama drive'><p className="text-base font-poppins">pajama drive</p></MenuItem> 
         

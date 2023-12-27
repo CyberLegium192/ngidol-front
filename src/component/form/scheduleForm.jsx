@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom'
 
 function scheduleForm({ open, setOpen }) {
   const [listPer, setListPer] = useState()
-  const [tema, setTema] = useState()
+  const [title, setTitle] = useState()
   const [date, setDate] = useState()
   const [time, setTime] = useState()
   const [link, setLink] = useState()
@@ -34,22 +34,43 @@ function scheduleForm({ open, setOpen }) {
     setData(deleteValue)
   }
   const handleSubmit = () => {
-      var vall = confirm("apakah data yang di masukan sudah benar?")
-      if(vall ==  true){
-        const noval = {
-          setlist: listPer,
-          tema: tema,
-          date: date,
-          time: time,
-          link: link,
-          acara: acara,
-          memberPerform: data
-      }
-      console.log(noval)
-        axios.post('http://localhost:3000/schedule', noval)
-        setTimeout(function() {location.href='/schedule'}, 700);
-      }
+  var vall = confirm("Apakah data yang dimasukkan sudah benar?");
+  if (vall) {
+    const requestData = {
+      setlist: listPer,
+      title,
+      date,
+      time,
+      link,
+      memberPerform: data
+    };
+    if(listPer == 'event'){
+    axios.post('http://localhost:3000/api/v1/schedule//post/schedule', requestData)
+      .then(response => {
+        console.log(response.data);
+        setTimeout(function () { location.href = '/schedule' }, 700);
+      })
+      .catch(error => {
+        console.error('Error posting data:', error.message);
+        // Handle error response if needed
+      });
+    }
+    else{
+      axios.post('http://localhost:3000/api/v1/schedule/api/addMembers', requestData)
+        .then(response => {
+          console.log(response.data);
+          setTimeout(function () { location.href = '/schedule' }, 700);
+        })
+        .catch(error => {
+          console.error('Error posting data:', error.message);
+          // Handle error response if needed
+        });
+      
+    }
+      
+      
   }
+};
 
   return (
     <div className="w-full z-40 h-screen duration-500 bg-white p-4" >
@@ -77,12 +98,11 @@ function scheduleForm({ open, setOpen }) {
         ">
           
           <Setlist setListPer={setListPer}/>
-          {
-            listPer !== "event" ? <Tema setTema={setTema}/> : 
+          
             <div>
-              <TextField id="standard-basic" label="acara" color='error' variant="standard" onChange={(e) => setAcara(e.target.value)} name='acara' className='w-full'/>
+              <TextField id="standard-basic" label="title" color='error' variant="standard" onChange={(e) => setTitle(e.target.value)} name='title' className='w-full'/>
             </div>
-          }
+         
           
           <div>
             <TextField id="standard-basic" label="Date" color='error' variant="standard" onChange={(e) => setDate(e.target.value)} name='Date' className='w-full'/>
@@ -98,7 +118,7 @@ function scheduleForm({ open, setOpen }) {
 
 
 
-
+        { listPer == 'event' ? null : 
           <div className='col-span-3'>
           <button className='btn btn-sm btn-accent mt-2' onClick={(e) => handleAddMember(e)}>Add Member</button> 
 
@@ -114,6 +134,11 @@ function scheduleForm({ open, setOpen }) {
               
             </div>
           </div>
+        } 
+          
+          
+          
+          
 
           <div className="mt-4">
             <ButtonSubmit handleSubmit={handleSubmit} />

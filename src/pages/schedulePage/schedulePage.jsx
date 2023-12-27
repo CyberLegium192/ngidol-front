@@ -13,23 +13,18 @@ function schedulePage() {
   
   
   useEffect(() => {
-      fetch('http://localhost:3000/api/v1/schedule/').then(resp => resp.json())
+      fetch('http://localhost:3000/api/v1/schedule/scheduleList').then(resp => resp.json())
       .then(datas => setData(datas.schedule))
   }, [])
 
-
-  const handleUpdate = (item) => {
-    setOpenEdit(!openEdit)
-    setReadData(item)
-  }
-
   const handleDelete = (item) => {
-    var val = confirm(`ingin menghapus data ${item.setlist}??`)
+    var val = confirm(`ingin menghapus data ${item.id}??`)
     if(val){
-      axios.delete(`http://localhost:3000/schedule/${item.id}`)
-      setTimeout(function() {
-        location.reload()
-      }, 700);
+      axios.delete(`http://localhost:3000/api/v1/schedule/delete/schedule/${item.id}`)
+      .then(resp => console.log(resp))
+      // setTimeout(function() {
+      //   location.reload()
+      // }, 3000);
     }
     else{alert("silahkan cek kembali")}
     
@@ -46,8 +41,6 @@ function schedulePage() {
         </div>
         
 
-        {/* <ScheduleForm open={open} setOpen={setOpen}/> */}
-        {/* <ScheduleFormEdit openEdit={openEdit} setOpenEdit={setOpenEdit} datas={readData}/> */}
         <div className="overflow-y-scroll h-screen no-scrollbar pb-64">
           <div className="lg:grid-cols-4 xl:grid-cols-5 gap-x-3 mt-7 gap-y-3
           min-[360px]:grid
